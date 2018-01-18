@@ -13,7 +13,7 @@
 - (void)star {
     UIImageView *shadowImg = [self findNavLineImageViewOn:self];
     shadowImg.hidden = YES;
-    [self setBackgroundColor:nil];
+    self.translucent = YES;
 }
 
 - (void)changeColor:(UIColor *)color WithScrollView:(UIScrollView *)scrollView AndValue:(CGFloat)value {
