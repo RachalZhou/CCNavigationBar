@@ -23,7 +23,12 @@
     }else {
         self.hidden = NO;
         //计算透明度
-        CGFloat alpha = scrollView.contentOffset.y /90 >1.0f ? 1:scrollView.contentOffset.y/90;
+        CGFloat alpha = scrollView.contentOffset.y / value >1.0f ? 1:scrollView.contentOffset.y / value;
+        if (alpha == 1) {
+            self.translucent = NO;
+        }else {
+            self.translucent = YES;
+        }
         //设置一个颜色并转化为图片
         UIImage *image = [self imageWithColor:[color colorWithAlphaComponent:alpha]];
         [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
@@ -33,6 +38,7 @@
 - (void)reset {
     UIImageView *shadowImg = [self findNavLineImageViewOn:self];
     shadowImg.hidden = NO;
+    self.translucent = NO;
     [self setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
