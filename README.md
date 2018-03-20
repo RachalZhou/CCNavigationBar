@@ -48,7 +48,7 @@ self.navigationController.navigationBar.backgroundColor = [UIColor redColor];
 通常展示信息页面都存在滑动视图（UItableview、UIcollectionView等），这就不难想到可以在滑动视图的**scrollViewDidScroll**这个方法里根据滑动视图纵向偏移量来计算颜色的透明度的。核心代码：
 
 ```
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     //计算透明度，90为随意设置的偏移量临界值
     CGFloat alpha = scrollView.contentOffset.y/90.0f >1.0f ? 1:scrollView.contentOffset.y/90.0f;
     //设置一个颜色并转化为图片
