@@ -16,11 +16,11 @@ self.navigationController.navigationBar.backgroundColor = [UIColor redColor];
 
 以上两个方法都可以为导航栏添加颜色，但是方法一的效果并非我们的需求。
 
-![直接设置背景色](https://github.com/RachalZhou/MarkdownPhotos/blob/master/nav_color_test1.png?raw=true)
+![直接设置背景色](http://oumlnfj3g.bkt.clouddn.com/18-8-20/73108531.jpg)
 
 原因在于UINavigationBar的结构中添加了UIView、UIImageView、UILabel等控件，覆盖了UINavigationBar。而方法二的效果是符合预期的。
 
-![UINavigationBar结构图](https://github.com/RachalZhou/MarkdownPhotos/blob/master/UINavigationBarStructure.png?raw=true)
+![UINavigationBar结构图](http://oumlnfj3g.bkt.clouddn.com/18-8-20/78551310.jpg)
 
 #### 如何将颜色转换为图片？
 直接贴代码并附上注释：
@@ -88,7 +88,7 @@ self.navigationController.navigationBar.hidden = YES;
 * **changeColor:WithScrollView:AndValue:**传入颜色、滑动视图、临界值来实现，一般在**scrollViewDidScroll**中调用；
 * **reset**显示导航栏下横线，还原导航栏，一般在**viewWillDisappear**中调用。
 
-![效果展示](https://github.com/RachalZhou/MarkdownPhotos/blob/master/effect.gif?raw=true)
+![效果展示](http://oumlnfj3g.bkt.clouddn.com/18-8-20/45359292.jpg)
 
 [完整demo](https://github.com/RachalZhou/ScrollChangeColorNav)
 
