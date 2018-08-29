@@ -49,8 +49,8 @@ self.navigationController.navigationBar.backgroundColor = [UIColor redColor];
 
 ```
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    //计算透明度，90为随意设置的偏移量临界值
-    CGFloat alpha = scrollView.contentOffset.y/90.0f >1.0f ? 1:scrollView.contentOffset.y/90.0f;
+    //计算透明度，180为随意设置的偏移量临界值
+    CGFloat alpha = scrollView.contentOffset.y/90.0f >1.0f ? 1 : scrollView.contentOffset.y / 180.0f;
     //设置一个颜色并转化为图片
     UIImage *image = [self imageWithColor:[UIColor colorWithRed:0.094 green:0.514 blue:0.192 alpha:alpha]];
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
@@ -85,7 +85,7 @@ self.navigationController.navigationBar.hidden = YES;
 #### 最后：封装
 为了方便使用，封装一个UINavigationBar的类别**UINavigationBar+ChangeColor**。使用方法如下：
 * **star**使用前，一般在**viewWillAppear**中调用，隐藏导航栏下的横线，将背景色置空；
-* **changeColor:WithScrollView:AndValue:**传入颜色、滑动视图、临界值来实现，一般在**scrollViewDidScroll**中调用；
+* **changeColor:withOffsetY:**传入颜色、滑动视图的偏移量，一般在**scrollViewDidScroll**中调用；
 * **reset**显示导航栏下横线，还原导航栏，一般在**viewWillDisappear**中调用。
 
 ![效果展示](http://oumlnfj3g.bkt.clouddn.com/18-8-20/45359292.jpg)
