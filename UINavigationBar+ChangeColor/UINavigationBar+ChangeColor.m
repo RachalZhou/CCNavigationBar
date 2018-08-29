@@ -10,45 +10,50 @@
 
 @implementation UINavigationBar (ChangeColor)
 
-- (void)star {
-    UIImageView *shadowImg = [self findNavLineImageViewOn:self];
-    shadowImg.hidden = YES;
+- (void)start {
+    
     self.translucent = YES;
+    UIImageView *shadowImg = [self seekLineImageViewOn:self];
+    shadowImg.hidden = YES;
 }
 
-- (void)changeColor:(UIColor *)color WithScrollView:(UIScrollView *)scrollView AndValue:(CGFloat)value {
-    if (scrollView.contentOffset.y < 0) {
+- (void)reset {
+    
+    self.translucent = NO;
+    UIImageView *shadowImg = [self seekLineImageViewOn:self];
+    shadowImg.hidden = NO;
+    [self setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)changeColor:(UIColor *)color withOffsetY:(CGFloat)offsetY {
+    
+    if (offsetY < 0) {
+        
         //下拉时导航栏隐藏
         self.hidden = YES;
     }else {
+        
         self.hidden = NO;
         //计算透明度
-        CGFloat alpha = scrollView.contentOffset.y / value > 1.0f ? 1:scrollView.contentOffset.y / value;
+        CGFloat alpha = offsetY / 180 > 1.0f ? 1 : (offsetY / 180);
+        
         //设置一个颜色并转化为图片
         UIImage *image = [self imageWithColor:[color colorWithAlphaComponent:alpha]];
         [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
         
-        self.translucent = alpha >= 1.0f ? NO:YES;
+        self.translucent = alpha >= 1.0f ? NO : YES;
     }
-}
-
-- (void)reset {
-    UIImageView *shadowImg = [self findNavLineImageViewOn:self];
-    shadowImg.hidden = NO;
-    [self setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    self.translucent = NO;
 }
 
 //寻找导航栏下的横线
-- (UIImageView *)findNavLineImageViewOn:(UIView *)view {
-    if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0) {
-        return (UIImageView *)view;
-    }
+- (UIImageView *)seekLineImageViewOn:(UIView *)view {
+    
+    if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0) return (UIImageView *)view;
+
     for (UIView *subview in view.subviews) {
-        UIImageView *imageView = [self findNavLineImageViewOn:subview];
-        if (imageView) {
-            return imageView;
-        }
+
+        UIImageView *imageView = [self seekLineImageViewOn:subview];
+        if (imageView) return imageView;
     }
     return nil;
 }
