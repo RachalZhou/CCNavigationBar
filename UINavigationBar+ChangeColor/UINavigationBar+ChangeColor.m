@@ -34,7 +34,7 @@
     }else {
         
         self.hidden = NO;
-        //计算透明度
+        //计算透明度，180为随意设置的偏移量临界值
         CGFloat alpha = offsetY / 180 > 1.0f ? 1 : (offsetY / 180);
         
         //设置一个颜色并转化为图片
