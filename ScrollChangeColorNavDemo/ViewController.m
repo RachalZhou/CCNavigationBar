@@ -7,51 +7,50 @@
 //
 
 #import "ViewController.h"
-#import "UINavigationBar+ChangeColor.h"
+#import "UIViewController+CCNav.h"
 #import "SecondViewController.h"
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView *tableview;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    [self layoutUI];
     
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    [self initBaseUI];
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar start];
-    
-    //该页面呈现时手动调用计算导航栏此时应当显示的颜色
-    [self scrollViewDidScroll:_tableview];
+    // 第一行代码：手动触发计算当前导航栏颜色
+    [self scrollViewDidScroll:self.tableView];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [self.navigationController.navigationBar reset];
-}
-
-- (void)initBaseUI {
-    //导航栏左按钮
+- (void)layoutUI
+{
+    // 导航栏左按钮
     UIImage *imgLeft = [[UIImage imageNamed:@"btn_nav_scan"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:imgLeft style:UIBarButtonItemStylePlain target:self action:@selector(onLeftNavBtnClick)];
     self.navigationItem.leftBarButtonItem = leftItem;
     
-    //导航栏右按钮
+    // 导航栏右按钮
     UIImage *imgRight = [[UIImage imageNamed:@"btn_nav_message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:imgRight style:UIBarButtonItemStylePlain target:self action:@selector(onRightNavBtnClick)];
     self.navigationItem.rightBarButtonItem = rightItem;
     
-    //中间搜索框
+    // 中间搜索框
     UITextField *tfSearch = [[UITextField alloc] init];
     tfSearch.bounds = CGRectMake(0, 0, kScreenW - 100, 28);
     tfSearch.backgroundColor = [UIColor colorWithRed:0.918 green:0.918 blue:0.918 alpha:0.80];
@@ -60,23 +59,21 @@
     tfSearch.font = [UIFont systemFontOfSize:14];
     self.navigationItem.titleView = tfSearch;
     
-    _tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, -kNavH, kScreenW, kScreenH) style:UITableViewStyleGrouped];
-    _tableview.delegate = self;
-    _tableview.dataSource = self;
-    [self.view addSubview:_tableview];
-    
-    //模拟轮播
+    // 模拟轮播
     UIView *bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 130)];
     bannerView.backgroundColor = [UIColor grayColor];
-    _tableview.tableHeaderView = bannerView;
+    self.tableView.tableHeaderView = bannerView;
 }
 
 #pragma mark - Tableview Datasource & Delegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return 25;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *reuse = @"reuseCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
     if (!cell) {
@@ -86,23 +83,41 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
     return 0.001f;
 }
 
-/* 滑动过程中做处理 */
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.navigationController.navigationBar changeColor:[UIColor redColor] withOffsetY:scrollView.contentOffset.y];
+// 第二行代码：滑动中计算导航栏颜色
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self changeColor:[UIColor redColor] scrolllView:scrollView];
 }
 
-#pragma mark - NavItem
-- (void)onLeftNavBtnClick {
+#pragma mark - Action
+
+- (void)onLeftNavBtnClick
+{
     SecondViewController *vc = [[SecondViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)onRightNavBtnClick {
+- (void)onRightNavBtnClick
+{
     
+}
+
+#pragma mark - lazyLoad
+- (UITableView *)tableView
+{
+    if (!_tableView)
+    {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH) style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
 }
 
 @end

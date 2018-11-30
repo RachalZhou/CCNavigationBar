@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C0B65C92136454B001C15F3 /* UINavigationBar+ChangeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B65C82136454B001C15F3 /* UINavigationBar+ChangeColor.m */; };
+		8C6F1F5D21B1669B00A98533 /* UIViewController+CCNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6F1F5B21B1669B00A98533 /* UIViewController+CCNav.m */; };
 		DF8F6B551DCC37D600DDEF31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F6B541DCC37D600DDEF31 /* main.m */; };
 		DF8F6B581DCC37D600DDEF31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F6B571DCC37D600DDEF31 /* AppDelegate.m */; };
 		DF8F6B5B1DCC37D600DDEF31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8F6B5A1DCC37D600DDEF31 /* ViewController.m */; };
@@ -36,8 +36,9 @@
 
 /* Begin PBXFileReference section */
 		8C0B65C521363DE2001C15F3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		8C0B65C72136454B001C15F3 /* UINavigationBar+ChangeColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ChangeColor.h"; sourceTree = "<group>"; };
-		8C0B65C82136454B001C15F3 /* UINavigationBar+ChangeColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ChangeColor.m"; sourceTree = "<group>"; };
+		8C6F1F5A21B1669B00A98533 /* UIViewController+CCNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CCNav.h"; sourceTree = "<group>"; };
+		8C6F1F5B21B1669B00A98533 /* UIViewController+CCNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CCNav.m"; sourceTree = "<group>"; };
+		8C6F1F5C21B1669B00A98533 /* SwizzlingDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwizzlingDefine.h; sourceTree = "<group>"; };
 		DF8F6B501DCC37D600DDEF31 /* ScrollChangeNavColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrollChangeNavColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8F6B541DCC37D600DDEF31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DF8F6B561DCC37D600DDEF31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,14 +80,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8C0B65C62136454B001C15F3 /* UINavigationBar+ChangeColor */ = {
+		8C6F1F5921B1669B00A98533 /* CCNav */ = {
 			isa = PBXGroup;
 			children = (
-				8C0B65C72136454B001C15F3 /* UINavigationBar+ChangeColor.h */,
-				8C0B65C82136454B001C15F3 /* UINavigationBar+ChangeColor.m */,
+				8C6F1F5C21B1669B00A98533 /* SwizzlingDefine.h */,
+				8C6F1F5A21B1669B00A98533 /* UIViewController+CCNav.h */,
+				8C6F1F5B21B1669B00A98533 /* UIViewController+CCNav.m */,
 			);
-			path = "UINavigationBar+ChangeColor";
-			sourceTree = SOURCE_ROOT;
+			path = CCNav;
+			sourceTree = "<group>";
 		};
 		DF8F6B471DCC37D600DDEF31 = {
 			isa = PBXGroup;
@@ -109,7 +111,7 @@
 		DF8F6B521DCC37D600DDEF31 /* ScrollChangeColorNavDemo */ = {
 			isa = PBXGroup;
 			children = (
-				8C0B65C62136454B001C15F3 /* UINavigationBar+ChangeColor */,
+				8C6F1F5921B1669B00A98533 /* CCNav */,
 				DF8F6B561DCC37D600DDEF31 /* AppDelegate.h */,
 				DF8F6B571DCC37D600DDEF31 /* AppDelegate.m */,
 				DF8F6B591DCC37D600DDEF31 /* ViewController.h */,
@@ -201,6 +203,7 @@
 				TargetAttributes = {
 					DF8F6B4F1DCC37D600DDEF31 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = WJLPEH3MDZ;
 						ProvisioningStyle = Automatic;
 					};
 					DF8F6B681DCC37D600DDEF31 = {
@@ -267,10 +270,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6F1F5D21B1669B00A98533 /* UIViewController+CCNav.m in Sources */,
 				DF8F6B8C1DCC3B2700DDEF31 /* SecondViewController.m in Sources */,
 				DF8F6B5B1DCC37D600DDEF31 /* ViewController.m in Sources */,
 				DF8F6B581DCC37D600DDEF31 /* AppDelegate.m in Sources */,
-				8C0B65C92136454B001C15F3 /* UINavigationBar+ChangeColor.m in Sources */,
 				DF8F6B551DCC37D600DDEF31 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,12 +421,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = WJLPEH3MDZ;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ScrollChangeColorNavDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ScrollChangeColorNavDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zrc.ScrollChangeColorNav;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zrc.ccnav;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -432,12 +435,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = WJLPEH3MDZ;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ScrollChangeColorNavDemo/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ScrollChangeColorNavDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zrc.ScrollChangeColorNav;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zrc.ccnav;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

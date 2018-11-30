@@ -3,7 +3,38 @@ iOS scroll to change the color of navigation.
 
 很多App首页要做成类似天猫和京东的导航栏，实现在页面滑动过程中导航栏渐变的效果。笔者之前在项目里用过一个三方，后来更新版本失效了，于是决定结合自己对导航栏的认识来实现一下这个功能。完成一个简易的iOS导航栏颜色渐变方案。
 
-<!-- more -->
+-------------2018.11.30更新-------------
+
+用的runtime的method swizzling进行了一次重构，方法封装在ViewController的category中，以降低使用成本，两行代码即可实现导航栏颜色渐变。
+
+### 用法
+
+* 1.导入``UIViewController+CCNav.h``
+* 2.在``viewWillAppear``中写上第一行代码
+
+```
+- (void)viewWillAppear:(BOOL)animated
+{
+[super viewWillAppear:animated];
+
+// 第一行代码：手动触发计算当前导航栏颜色
+[self scrollViewDidScroll:self.tableView];
+}
+```
+
+* 3.在``scrollViewDidScroll``中写上第二行代码
+
+```
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+// 第二行代码：滑动中计算导航栏颜色
+[self changeColor:[UIColor redColor] scrolllView:scrollView];
+}
+```
+
+以上两行代码即可实现需求。可参考原文理解原理。
+
+-------------原文-------------
 
 【文末附运行效果及demo】
 
@@ -21,20 +52,21 @@ self.navigationController.navigationBar.backgroundColor = [UIColor redColor];
 
 以上两个方法都可以为导航栏添加颜色，但是方法一的效果并非此处所需。
 
-![直接设置背景色的效果](http://oumlnfj3g.bkt.clouddn.com/18-3-20/11876209.jpg)
+![直接设置背景色的效果](http://note.youdao.com/yws/res/9513/WEBRESOURCE253f2b3fd82318d60d7439372d82fb61)
 
 原因在于 ``UINavigationBar`` 的结构中添加了 ``UIView`` 、 ``UIImageView`` 、 ``UILabel``等控件，覆盖了 ``UINavigationBar`` 。
 
 方法二的效果符合预期。
 
-![UINavigationBar结构图](http://oumlnfj3g.bkt.clouddn.com/17-8-13/25254519.jpg)
+![UINavigationBar结构图](http://note.youdao.com/yws/res/9518/WEBRESOURCE6954bd6d77a823bd4251604e2e86a5f2)
 
 ### 如何将颜色转换为图片？
 
 直接贴代码并附上注释：
 
 ```
-- (UIImage *)imageWithColor:(UIColor *)color {
+- (UIImage *)imageWithColor:(UIColor *)color
+{
 //创建1像素区域并开始图片绘图
 CGRect rect = CGRectMake(0, 0, 1, 1);
 UIGraphicsBeginImageContext(rect.size);
@@ -94,14 +126,14 @@ self.navigationController.navigationBar.hidden = YES;
 //UINavigationBar+ChangeColor.m文件
 
 //核心方法
-- (void)changeColor:(UIColor *)color withOffsetY:(CGFloat)offsetY {
-
+- (void)changeColor:(UIColor *)color withOffsetY:(CGFloat)offsetY 
+{
 if (offsetY < 0) {
-
 //下拉时导航栏隐藏
 self.hidden = YES;
-}else {
-
+}
+else
+{
 self.hidden = NO;
 //计算透明度，180为随意设置的偏移量临界值
 CGFloat alpha = offsetY / 180 > 1.0f ? 1 : (offsetY / 180);
@@ -125,7 +157,8 @@ self.translucent = alpha >= 1.0f ? NO : YES;
 //VC.m文件
 
 /* 页面即将显示 */
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
 [super viewWillAppear:animated];
 
 [self.navigationController.navigationBar start];
@@ -135,23 +168,27 @@ self.translucent = alpha >= 1.0f ? NO : YES;
 }
 
 /* 页面即将消失 */
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
 [super viewWillDisappear:animated];
 
 [self.navigationController.navigationBar reset];
 }
 
 /* 滑动过程中做处理 */
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
 [self.navigationController.navigationBar changeColor:[UIColor redColor] withOffsetY:scrollView.contentOffset.y];
 }
 ```
 
-![效果展示](http://oumlnfj3g.bkt.clouddn.com/17-8-13/42310939.jpg)
+![效果展示](http://note.youdao.com/yws/res/9524/WEBRESOURCE95f1ffcd1578a51fffdb6ef30a346fed)
 
 [完整demo](https://github.com/RachalZhou/ScrollChangeColorNav)
 
 ## 总结
+
 * 由于系统自带的导航栏经常不能满足需求，因此在开发中导航栏经常需要自定义，哪怕只是修改背景色。
 * 了解导航栏的结构处理起来会更容易。
 * 自定义导航栏也要考虑和其他页面的导航栏之间的相互影响。
+

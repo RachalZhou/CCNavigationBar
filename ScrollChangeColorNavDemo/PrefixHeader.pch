@@ -14,7 +14,5 @@
 
 #define kScreenW CGRectGetWidth([UIScreen mainScreen].bounds)
 #define kScreenH CGRectGetHeight([UIScreen mainScreen].bounds)
-#define kTabBarH (kScreenH == 812?83:49)
-#define kNavH (kScreenH == 812?88:64)
 
 #endif /* PrefixHeader_pch */
