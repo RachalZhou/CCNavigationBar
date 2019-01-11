@@ -14,9 +14,9 @@
 
 @implementation SecondViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"二级页面";
     self.view.backgroundColor = [UIColor whiteColor];
 }
 

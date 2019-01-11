@@ -35,7 +35,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8C0B65C521363DE2001C15F3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		8C6F1F5A21B1669B00A98533 /* UIViewController+CCNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CCNav.h"; sourceTree = "<group>"; };
 		8C6F1F5B21B1669B00A98533 /* UIViewController+CCNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CCNav.m"; sourceTree = "<group>"; };
 		8C6F1F5C21B1669B00A98533 /* SwizzlingDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwizzlingDefine.h; sourceTree = "<group>"; };
@@ -93,7 +92,8 @@
 		DF8F6B471DCC37D600DDEF31 = {
 			isa = PBXGroup;
 			children = (
-				DF8F6B521DCC37D600DDEF31 /* ScrollChangeColorNavDemo */,
+				8C6F1F5921B1669B00A98533 /* CCNav */,
+				DF8F6B521DCC37D600DDEF31 /* Demo */,
 				DF8F6B511DCC37D600DDEF31 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,24 +108,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DF8F6B521DCC37D600DDEF31 /* ScrollChangeColorNavDemo */ = {
+		DF8F6B521DCC37D600DDEF31 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				8C6F1F5921B1669B00A98533 /* CCNav */,
 				DF8F6B561DCC37D600DDEF31 /* AppDelegate.h */,
 				DF8F6B571DCC37D600DDEF31 /* AppDelegate.m */,
 				DF8F6B591DCC37D600DDEF31 /* ViewController.h */,
 				DF8F6B5A1DCC37D600DDEF31 /* ViewController.m */,
 				DF8F6B8A1DCC3B2700DDEF31 /* SecondViewController.h */,
 				DF8F6B8B1DCC3B2700DDEF31 /* SecondViewController.m */,
-				8C0B65C521363DE2001C15F3 /* PrefixHeader.pch */,
 				DF8F6B5C1DCC37D600DDEF31 /* Main.storyboard */,
 				DF8F6B5F1DCC37D600DDEF31 /* Assets.xcassets */,
 				DF8F6B611DCC37D600DDEF31 /* LaunchScreen.storyboard */,
 				DF8F6B641DCC37D600DDEF31 /* Info.plist */,
 				DF8F6B531DCC37D600DDEF31 /* Supporting Files */,
 			);
-			path = ScrollChangeColorNavDemo;
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		DF8F6B531DCC37D600DDEF31 /* Supporting Files */ = {
@@ -198,13 +196,12 @@
 		DF8F6B481DCC37D600DDEF31 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = RachalZhou;
 				TargetAttributes = {
 					DF8F6B4F1DCC37D600DDEF31 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = WJLPEH3MDZ;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					DF8F6B681DCC37D600DDEF31 = {
 						CreatedOnToolsVersion = 8.1;
@@ -336,15 +333,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -384,15 +390,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -421,13 +436,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = WJLPEH3MDZ;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/ScrollChangeColorNavDemo/PrefixHeader.pch";
-				INFOPLIST_FILE = "$(SRCROOT)/ScrollChangeColorNavDemo/Info.plist";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zrc.ccnav;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -435,13 +452,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = WJLPEH3MDZ;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/ScrollChangeColorNavDemo/PrefixHeader.pch";
-				INFOPLIST_FILE = "$(SRCROOT)/ScrollChangeColorNavDemo/Info.plist";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zrc.ccnav;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

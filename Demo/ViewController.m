@@ -10,6 +10,9 @@
 #import "UIViewController+CCNav.h"
 #import "SecondViewController.h"
 
+#define kScreenW CGRectGetWidth([UIScreen mainScreen].bounds)
+#define kScreenH CGRectGetHeight([UIScreen mainScreen].bounds)
+
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -18,8 +21,8 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     [self layoutUI];
     
@@ -30,16 +33,16 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     
     // 第一行代码：手动触发计算当前导航栏颜色
     [self scrollViewDidScroll:self.tableView];
 }
 
-- (void)layoutUI
-{
+- (void)layoutUI {
+    
     // 导航栏左按钮
     UIImage *imgLeft = [[UIImage imageNamed:@"btn_nav_scan"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:imgLeft style:UIBarButtonItemStylePlain target:self action:@selector(onLeftNavBtnClick)];
@@ -66,14 +69,12 @@
 }
 
 #pragma mark - Tableview Datasource & Delegate
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 25;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *reuse = @"reuseCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
     if (!cell) {
@@ -83,35 +84,30 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.001f;
 }
 
-// 第二行代码：滑动中计算导航栏颜色
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    // 第二行代码：滑动中计算导航栏颜色
     [self changeColor:[UIColor redColor] scrolllView:scrollView];
 }
 
 #pragma mark - Action
-
-- (void)onLeftNavBtnClick
-{
+- (void)onLeftNavBtnClick {
     SecondViewController *vc = [[SecondViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)onRightNavBtnClick
-{
+- (void)onRightNavBtnClick {
     
 }
 
 #pragma mark - lazyLoad
-- (UITableView *)tableView
-{
-    if (!_tableView)
-    {
+- (UITableView *)tableView {
+    
+    if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;

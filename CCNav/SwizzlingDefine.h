@@ -11,8 +11,8 @@
 
 #import <objc/runtime.h>
 
-static inline void swizzling_exchangeMethod(Class clazz ,SEL originalSelector, SEL swizzledSelector)
-{
+static inline void swizzling_exchangeMethod(Class clazz ,SEL originalSelector, SEL swizzledSelector) {
+    
     Method originalMethod = class_getInstanceMethod(clazz, originalSelector);
     Method swizzledMethod = class_getInstanceMethod(clazz, swizzledSelector);
     
@@ -20,15 +20,12 @@ static inline void swizzling_exchangeMethod(Class clazz ,SEL originalSelector, S
                                    originalSelector,
                                    method_getImplementation(swizzledMethod),
                                    method_getTypeEncoding(swizzledMethod));
-    if (success)
-    {
+    if (success) {
         class_replaceMethod(clazz,
                             swizzledSelector,
                             method_getImplementation(originalMethod),
                             method_getTypeEncoding(originalMethod));
-    }
-    else
-    {
+    }else {
         method_exchangeImplementations(originalMethod, swizzledMethod);
     }
 }

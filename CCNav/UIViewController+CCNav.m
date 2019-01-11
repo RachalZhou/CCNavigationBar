@@ -13,8 +13,8 @@
 
 #pragma mark - 准备工作
 
-+ (void)load
-{
++ (void)load {
+    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         swizzling_exchangeMethod([UIViewController class],
@@ -26,44 +26,44 @@
     });
 }
 
-- (void)swizzled_viewWillAppear:(BOOL)animated
-{
+- (void)swizzled_viewWillAppear:(BOOL)animated {
     [self start];
     [self swizzled_viewWillAppear:animated];
 }
 
-- (void)swizzled_viewWillDisappear:(BOOL)animated
-{
+- (void)swizzled_viewWillDisappear:(BOOL)animated {
     [self reset];
     [self swizzled_viewWillDisappear:animated];
 }
 
 #pragma mark - 业务逻辑
 
-- (void)start
-{
+- (void)start {
     self.navigationController.navigationBar.translucent = YES;
     UIImageView *shadowImg = [self seekLineImageViewOn:self.navigationController.navigationBar];
     shadowImg.hidden = YES;
 }
 
-- (void)reset
-{
+- (void)reset {
     self.navigationController.navigationBar.translucent = NO;
     UIImageView *shadowImg = [self seekLineImageViewOn:self.navigationController.navigationBar];
     shadowImg.hidden = NO;
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
-- (void)changeColor:(UIColor *)color scrolllView:(UIScrollView *)scrollView
-{
+- (void)changeColor:(UIColor *)color scrolllView:(UIScrollView *)scrollView {
+    // 默认临界值为200
+    [self changeColor:color scrolllView:scrollView criticalValue:200];
+}
+
+- (void)changeColor:(UIColor *)color scrolllView:(UIScrollView *)scrollView criticalValue:(CGFloat)value {
+    
     CGFloat offsetY = scrollView.contentOffset.y;
     self.navigationController.navigationBar.hidden = offsetY < 0 ? YES : NO;
     
-    if (offsetY >= 0)
-    {
-        // 透明度 （200为临界值，根据具体情况z设置）
-        CGFloat alpha = offsetY / 200 > 1.0f ? 1 : (offsetY / 200);
+    if (offsetY >= 0) {
+        // 透明度
+        CGFloat alpha = offsetY / value > 1.0f ? 1 : (offsetY / value);
         self.navigationController.navigationBar.translucent = alpha >= 1.0f ? NO : YES;
         
         // 背景色
@@ -73,11 +73,11 @@
 }
 
 // 查找导航栏下的横线
-- (UIImageView *)seekLineImageViewOn:(UIView *)view
-{
+- (UIImageView *)seekLineImageViewOn:(UIView *)view {
+    
     if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0) return (UIImageView *)view;
-    for (UIView *subview in view.subviews)
-    {
+    
+    for (UIView *subview in view.subviews) {
         UIImageView *imageView = [self seekLineImageViewOn:subview];
         if (imageView) return imageView;
     }
@@ -86,8 +86,7 @@
 
 #pragma mark - Color To Image
 
-- (UIImage *)imageWithColor:(UIColor *)color
-{
+- (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0, 0, 1, 1);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
